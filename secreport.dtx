@@ -26,7 +26,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{secreport}
 %<*class>
-    [2023/02/15 v1.00 Reports for the Computer Security course of the University of Namur]
+    [2023/02/17 v1.00 Reports for the Computer Security course of the University of Namur]
 %</class>
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -91,7 +91,7 @@
 % 
 % \title{\textsf{secreport} --- Reports for the Computer Security course of the University of Namur}
 % \author{Martin Jacob \\ \href{mailto:martin.jacob@student.unamur.be}{\textcolor{black}{\texttt{martin.jacob@student.unamur.be}}}}
-% \date{2023-02-15\\ v1.00}
+% \date{2023-02-17\\ v1.00}
 % 
 % \newcommand{\ctan}[1]{\href{https://ctan.org/pkg/#1}{\texttt{#1}}}
 % \newcommand{\unamur}[2]{\href{#1}{\textcolor{unamur_color}{#2}}}
@@ -104,7 +104,7 @@
 % \maketitle
 % \tableofcontents
 % 
-% \changes{v1.00}{2023/02/15}{First public release}
+% \changes{v1.00}{2023/02/17}{First public release}
 % 
 % \section{Introduction}
 % This \LaTeXe\ class was designed exclusively for the creation of reports for the practical classes of the Computer Security (INFOB301) course of the \unamur{https://unamur.be}{University of Namur}.
@@ -313,6 +313,7 @@
 \ProcessOptions\relax
 \LoadClass[a4paper]{article}
 
+\RequirePackage[french]{babel}
 \RequirePackage{hyperref}
 \RequirePackage{fancyhdr}
 \RequirePackage{graphicx}
@@ -597,8 +598,8 @@
 % \fi
 % Set default configuration for the \ctan{minted} package.
 %    \begin{macrocode}
-\setminted{autogobble, bgcolor=lightergray, breaklines}
-\setminted[Python]{linenos, frame=lines, framesep=2mm}
+\setminted{autogobble, bgcolor=lightergray, breaklines, linenos, frame=lines, framesep=5pt}
+\setminted[text]{linenos=false, frame=none}
 %    \end{macrocode}
 % \iffalse
 

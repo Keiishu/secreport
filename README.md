@@ -14,4 +14,4 @@ Similarly, to get a copy of the documentation, you can either compile `secreport
 Check the documentation for examples and more detailed instructions.
 
 ## License
-This work may be distributed and/or modified under the conditions of the [LaTeX Project Public License (LPPL)](http://www.latex-project.org/lppl.txt), version 1.3 or later.
+This work may be distributed and/or modified under the conditions of the [LaTeX Project Public License (LPPL)](http://www.latex-project.org/lppl.txt), version 1.3c or later.
