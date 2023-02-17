@@ -547,6 +547,13 @@
 
 %% === Text Formatting ===
 % \fi
+% Define custom colours.
+%    \begin{macrocode}
+\definecolor{lightergray}{rgb}{0.9, 0.9, 0.9}
+%    \end{macrocode}
+% \iffalse
+
+% \fi
 % \begin{macro}{\code}
 % Define a macro to quickly typeset simple code-like text.
 %    \begin{macrocode}
@@ -590,7 +597,7 @@
 % \fi
 % Set default configuration for the \ctan{minted} package.
 %    \begin{macrocode}
-\setminted{autogobble, bgcolor=lightgray, breaklines}
+\setminted{autogobble, bgcolor=lightergray, breaklines}
 \setminted[Python]{linenos, frame=lines, framesep=2mm}
 %    \end{macrocode}
 % \iffalse
