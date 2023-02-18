@@ -19,6 +19,8 @@ You can name it whatever you want, just be sure to tell the class with `\challen
 
 As you would probably have done it anyway, you have to name your challenges with a prefix. Again, whatever you want, but you probably want something simple. Use `\challengesprefix{<prefix>}` to setup your chosen prefix.
 
+Once this is all set, use `\includechallenges{<num>}` in your document environment to import your challenges within the main file -- `<num>` being the number of challenges you want to import.
+
 #### **Example**
 ```
 .
@@ -42,13 +44,17 @@ As you would probably have done it anyway, you have to name your challenges with
 
 \challengespath{Challenges}
 \challengesprefix{C}
+
+\begin{document}
+\includechallenges{4}
+\end{document}
 ```
 </details>
 
 ### Title page
 The title page is typeset automatically by the class. The only thing you have to change is your report/group number, with `\reportnum{<num>}` and `\groupnum{<num>}` respectively.
 
-Once both are set, use `\maketitle` in your document environement, as per usual.
+Once both are set, use `\maketitle` in your document environment, as per usual.
 
 ### Text formatting
 To quickly typeset simple code-like text (e.g. a filename with extension), you can use `\code{<text>}`.
@@ -59,7 +65,7 @@ with the ``\parskip`` length, use the ```noparskip``` environment.
 #### Highlighting source code
 To highlight source code, this class imports the [minted](https://ctan.org/pkg/minted) package. It is advised to read the [original documentation](http://mirrors.ctan.org/macros/latex/contrib/minted/minted.pdf) to master it properly, as it is way more extensive than what is described here.
 
-Use the `minted` environement to highlight multiple lines.
+Use the `minted` environment to highlight multiple lines.
 ```LaTeX
 \begin{minted}{<language>}
 <code>
