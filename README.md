@@ -9,7 +9,7 @@ Once you have them, place them both in the root folder of your project and impor
 Similarly, to get a copy of the documentation, you can either compile `secreport.dtx` or get it from the latest release.
 
 ## Usage
-A blank project with a pre-made structure is available in the `examples` folder.
+A blank project with a pre-made structure is available in the `examples` folder as well as on [Overleaf](https://www.overleaf.com/read/gnnvbfvnkchs), where you can duplicate it for your own use.
 
 Check the documentation for examples and more detailed instructions.
 
