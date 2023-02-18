@@ -11,6 +11,8 @@ Similarly, to get a copy of the documentation, you can either compile `secreport
 ## Usage
 *TODO*
 
+A blank project with a pre-made structure is available in the `examples` folder.
+
 Check the documentation for examples and more detailed instructions.
 
 ## License
