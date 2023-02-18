@@ -1,0 +1,659 @@
+% \iffalse meta-comment
+% Class for reports for the Computer Security course of the University of Namur
+%
+% Copyright (C) 2023 by Martin Jacob <martin.jacob@student.unamur.be>
+% -------------------------------------------------------------------
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Martin Jacob.
+%
+% This work consists of the files secreport.dtx and secreport.ins
+% and the derived file secreport.sty.
+% \fi
+
+% \iffalse
+%<*driver>
+\ProvidesFile{secreport.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}
+%<class>\ProvidesClass{secreport}
+%<*class>
+    [2023/02/17 v1.00 Reports for the Computer Security course of the University of Namur]
+%</class>
+%<*driver>
+\documentclass[a4paper]{ltxdoc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hypdoc}
+\usepackage[left=4cm,right=4cm]{geometry}
+\usepackage[english]{babel}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{etoolbox}
+\usepackage{listofitems}
+\usepackage{dirtree}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=cyan,
+    pdfinfo={
+        Title={secreport.cls},
+        Subject={secreport class documentation file},
+        Keywords={LaTeX, TeX, class, documentation, University of Namur, Computer Security, security},
+        Author={Martin Jacob}
+    }
+}
+\MakeOuterQuote{"}
+\setlist[enumerate,itemize]{align=left}
+
+\begin{document}
+    \DocInput{\jobname.dtx}
+    \newpage
+    \PrintChanges
+    \PrintIndex
+\end{document}
+%</driver>
+% \fi
+% 
+% \GetFileInfo{\jobname.dtx}
+%
+% \def\DescribeEnvNoIndex{\leavevmode\begingroup\MakePrivateLetters
+%  \Describe@EnvNoIndex}
+% \def\Describe@EnvNoIndex#1{\endgroup
+%               \marginpar{\raggedleft\PrintDescribeEnv{#1}}^^A
+%               \ignorespaces}
+%
+% \begingroup
+% \makeatletter
+% \lccode`9=32\relax
+% \lowercase{^^A
+%   \edef\nosp{\noexpand\DoNotIndex{\@backslashchar9}}^^A
+% }^^A
+% \expandafter\endgroup\nosp
+%
+% \expandafter\DoNotIndex\expandafter{\bslash}
+% \DoNotIndex{\@empty,\@gobbletwo,\\,\arabic,\begin,\bfseries,\ClassInfo,\csname,\CurrentOption,\DeclareRobustCommand,\def,\detokenize,\else,\end,\endcsname,\expandafter,\fi,\foreach,\gdef,\global,\huge,\href,\if,\IfEndWith,\ifnumcomp,\ifx,\ignorespaces,\ignorespacesafterend,\include,\includegraphics,\LARGE,\Large,\large,\let,\linewidth,\MakeUppercase,\mbox,\newcommand,\newenvironment,\newpage,\null,\numexpr,\par,\PassOptionsToClass,\ProcessOptions,\quad,\relax,\rule,\sectionignore,\textbf,\textcolor,\textit,\textsc,\textsuperscript,\texttt,\the,\thepage,\thesection,\thesubsection,\trim@spaces,\undefined,\vfill,\vskip,\vspace,\x,\xdef}
+% 
+% \title{\textsf{secreport} --- Reports for the Computer Security course of the University of Namur}
+% \author{Martin Jacob \\ \href{mailto:martin.jacob@student.unamur.be}{\textcolor{black}{\texttt{martin.jacob@student.unamur.be}}}}
+% \date{2023-02-17\\ v1.00}
+% 
+% \newcommand{\ctan}[1]{\href{https://ctan.org/pkg/#1}{\texttt{#1}}}
+% \newcommand{\unamur}[2]{\href{#1}{\textcolor{unamur_color}{#2}}}
+% \newcommand{\textopt}[1]{$\langle #1\rangle$}
+% \newcommand*{\ms}[2]{\readlist*\msopt{#2}\relax\fbox{\cmd{#1\ifnumcomp{\msoptlen}{>}{0}{\foreachitem\x\in\msopt[]{\{\textopt{\x}\}}}{}}}\def\msopt{\undefined}\par}
+% \newcommand{\es}[2]{\fbox{\parbox[t]{.4\linewidth}{\cmd{\begin\{#1\}\ifstrempty{#2}{}{\{$\langle #2\rangle$\}}\\...\\\bslash end\{#1\}}}}\par}
+% \newenvironment{macrodesc}{\setlength{\parskip}{1ex plus .5ex minus .2ex}\setlength{\parindent}{0pt}\par\ignorespaces}{\par\ignorespacesafterend}
+% \definecolor{unamur_color}{HTML}{69be28}
+% 
+% \maketitle
+% \tableofcontents
+% 
+% \changes{v1.00}{2023/02/17}{First public release}
+% 
+% \section{Introduction}
+% This \LaTeXe\ class was designed exclusively for the creation of reports for the practical classes of the Computer Security (INFOB301) course of the \unamur{https://unamur.be}{University of Namur}.
+% It contains a predefined design, as well as some pre-configured packages considered useful for writing such reports (e.g., \ctan{minted}, \ctan{graphicx}, \ctan{hyperref}). It is based on the \ctan{article} class.
+% 
+% This class is somewhat opinionated regarding the structure of your report. It is strongly recommended that each challenge is in a separate file\footnote{A separate "challenges" folder can be set.}. You can find an example of this in the \autoref{subsubsec:struct-example}.
+% 
+% While this documentation is in English, the documents created with this class will be in French, for now. Support for English is planned in a future update.
+% 
+% \section{Usage}
+% \subsection{Loading}\label{subsec:usage_loading}
+% You can load this class the same way you load any document class:
+% \\\fbox{\cmd{\documentclass[\textopt{options}]\{secreport\}}}
+% 
+% Regardless of the method used to get this class, you should have the \texttt{unamur.png}\footnote{SHA256: C8A7B146F2384DC4460558D1226DD816B97AE529B79BEFF36C8692E4D0234E46} file. If you do not have it for some reason, you can download it \href{https://pds.unamur.be/presse/logos/unamur.png}{here}.
+% It is used in the title page and the header and is displayed with the \ctan{graphicx} package. It is thus required for compilation.
+% 
+% You can place it wherever you want, but if you decide to move it elsewhere than alongside your main document file, you have to set the designated folder using \ctan{graphicx}'s \cmd{\graphicspath}.
+% 
+% \subsection{Making the title page}
+% \begin{macrodesc}
+% \DescribeMacro{\and}{Even though the authors are now displayed vertically, the \cmd{\author} macro has not changed. Instead, \cmd{\and} now simply puts a classic line break (\cmd{\\}) for the tabular to typeset the authors as wanted.}
+% 
+% \DescribeMacro{\reportnum}
+% {^^A
+%     \ms{\reportnum}{num}
+%     where \textopt{num} is the number of the current report.
+    
+%     Use this to set the report number that will be reflected in the title and the header. Defaults to 1.
+% }
+% 
+% \DescribeMacro{\groupnum}
+% {^^A
+%     \ms{\groupnum}{num}
+%     where \textopt{num} is the number of your group.
+% 
+%     Use this to set the group number that will be reflected in the header. Defaults to 1.
+% }
+% 
+% \DescribeMacro{\maketitle}
+% {^^A
+%     Once \cmd{\reportnum} and \cmd{\groupnum} are set, use this to generate the title page. Just like in the \ctan{article} class, this has to be inside the \texttt{document} environment.
+% }
+% \end{macrodesc}
+% 
+% \subsection{Sectioning}
+% \begin{macrodesc}
+% \DescribeMacro{\section}
+% {^^A
+%     \ms{\section}{title}
+%     where \textopt{title} is the title of your section.
+% 
+%     The sections have been thought to be exclusively used for sectioning challenges and thus, have their numbering removed.
+% 
+%     The main reason behind that reasoning is that you most likely want to write <<~Challenge 1~>> rather than <<~1.\quad Challenge 1~>>, but still having the section to be displayed in the table of contents, and still having the section numbering to be incremented for the subsections to be numbered correctly.
+%  
+%     As it is restricting, a separate command for this purpose while keeping the original sectioning format is not out of the question on a future update.
+% }
+% 
+% \DescribeMacro{\tableofcontents}
+% {^^A
+%     Generates the table of contents on a separate page.
+% }
+% \end{macrodesc}
+% 
+% \subsection{Date}
+% \begin{macrodesc}
+% \DescribeMacro{\todayinquarters}
+% {^^A
+%     Prints the current date in quarters, according to the usual timings provided by the \unamur{https://www.unamur.be/etudes/etudiant/calendrier}{official academical calendar}. Might be wrong by a few days.
+% 
+%     \textit{e.g., <<~2\textsuperscript{e}\ quadrimestre 2022-2023~>>}
+% }
+% 
+% \DescribeMacro{\date}
+% {^^A
+%     Same definition as the \ctan{article} class. Defaults to \cmd{\todayinquarters}.
+% }
+% \end{macrodesc}
+% 
+% \subsection{Highlighting source code}
+% As this work will be used in the context of a computer security course, you might want to include source code with syntax highlighting.
+% 
+% To do so, the \ctan{minted} package is imported with some default settings to help you typeset your code.
+% What is provided here is a \textit{really} short documentation compared to the capacities of the package. It is advised to read the \href{http://mirrors.ctan.org/macros/latex/contrib/minted/minted.pdf}{original documentation} to master it properly.
+% 
+% \begin{macrodesc}
+% \DescribeEnvNoIndex{minted}
+% {^^A
+%     \es{minted}{language}
+%     where \textopt{language} is the language you want to set the syntax highlighting to.
+% }
+% 
+% \DescribeMacro{\mintinline}
+% {^^A
+%     \ms{\mintinline}{language, code}
+%     where \textopt{language} is the language you want to set the syntax highlighting to, and \textopt{code} is the line of code.
+% 
+%     Use this to typeset a single line of code inline. This box will not break, so be careful about overfull boxes.
+% 
+%     The given syntax is simplified for a common use case, as it is possible to set options and a custom delimiter for the \textopt{code}.
+% }
+% 
+% \DescribeMacro{\inputminted}
+% {^^A
+%     \ms{\inputminted}{language, filename}
+%     where \textopt{language} is the language you want to set the syntax highlighting to, and \textopt{filename} is the name of the file you want to import.
+% 
+%     The given syntax is simplified for a common use case, as it is possible to set options.
+% }
+% \end{macrodesc}
+% 
+% \subsection{Text formatting}
+% This class sets \cmd{\parindent} to \fbox{2em} and \cmd{\parskip} to \fbox{1ex plus 0.5ex minus 0.2ex} by default.
+% 
+% To typeset paragraphs without a space between them, and without having to play with the \cmd{\parskip} length, a new environment is defined.
+% 
+% \begin{macrodesc}
+% \DescribeEnv{noparskip}
+% {^^A
+%     \es{noparskip}{}
+% }
+% 
+% \DescribeMacro{\code}
+% {^^A
+%   \ms{\code}{text}
+%   where \textopt{text} is the text to typeset.
+%   
+%   Use this to quickly typeset simple code-like text (e.g., a filename with extension)
+% }
+% \end{macrodesc}
+% 
+% \subsection{Challenges}
+% \begin{macrodesc}
+% \DescribeMacro{\challengespath}
+% {^^A
+%   \ms{\challengespath}{path}
+%   where \textopt{path} is the relative path to the folder containing the challenges files.
+%   
+%   Use this to configure the challenges folder for the \cmd{\includechallenges} command. Space are allowed inside \textopt{path}.
+% }
+% 
+% \DescribeMacro{\challengespath}
+% {^^A
+%   \ms{\challengesprefix}{prefix}
+%   where \textopt{prefix} is the prefix of your challenges files.
+%   
+%   Use this to configure the prefix of your files for the \cmd{\includechallenges} command. Space are allowed inside \textopt{prefix}.
+% }
+% 
+% \DescribeMacro{\includechallenges}
+% {^^A
+%   \ms{\includechallenges}{num}
+%   where \textopt{num} is the number of challenges to include.
+% 
+%   Use this to automatically include the challenges files either contained in the same folder as the file you're using this command in, or in the folder configured with \cmd{\challengespath}.
+% }
+% \end{macrodesc}
+% 
+% \subsubsection{Example}\label{subsubsec:struct-example}
+% \begin{macrodesc}
+% Let's say you decided to place your challenges files in a folder named "\texttt{Challenges}", each file beginning with "C", followed by the number of the challenge. You should then have a file tree structure similar to the following:
+% 
+% \fbox{\parbox[t]{.6\linewidth}{^^A
+% \dirtree{^^A
+%   .1 ./.
+%   .2 Challenges.
+%   .3 C1.tex.
+%   .3 C2.tex.
+%   .3 C3.tex.
+%   .3 C4.tex.
+%   .2 Images.
+%   .3 unamur\_logo.png\DTcomment{Refer to \nameref{subsec:usage_loading}}.
+%   .2 main.tex\DTcomment{Your main document file}.
+% }}}
+% 
+% Then you would have to type:
+% \end{macrodesc}
+% \begin{itemize}
+%   \item \cmd{\challengespath\{Challenges\}}
+%   \item \cmd{\challengesprefix\{C\}}
+% \end{itemize}
+% in the preamble and
+% \begin{itemize}
+%   \item \cmd{\includechallenges\{4\}}
+% \end{itemize}
+% after \cs{begin\{document\}}.
+% 
+% \section{Class options}
+% \begin{enumerate}
+%     \item[\texttt{nogeometry}] prevents the loading of the \ctan{geometry} package. This exists as long as a way for users to load with custom options the \ctan{geometry} package on their own has not been implemented. For now, this class loads it with options "a4paper,top=25mm" by default.
+% \end{enumerate}
+% The remaining options are the same as the \ctan{article} class.
+% 
+%\StopEventually{^^A
+%  \PrintChanges
+%  \PrintIndex
+%}
+% 
+% \section{Implementation}
+% \subsection{Options, Base class and Required packages}
+%    \begin{macrocode}
+%<*class>
+\DeclareOption{nogeometry}{\def\secreport@opt@nogeo}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+\LoadClass[a4paper]{article}
+
+\RequirePackage[french]{babel}
+\RequirePackage{hyperref}
+\RequirePackage{fancyhdr}
+\RequirePackage{graphicx}
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{minted}
+\RequirePackage{etoolbox}
+\RequirePackage{xstring}
+\RequirePackage{pgffor}
+\RequirePackage{trimspaces}
+\ifx\secreport@opt@nogeo\undefined
+    \RequirePackage[a4paper,top=25mm]{geometry}
+    \ClassInfo{secreport}{
+        The 'nogeometry' option has not been used.
+        The geometry package has been loaded with options "a4paper,top=25mm".}
+\fi
+\let\secreport@opt@nogeo\@empty
+%    \end{macrocode}
+% 
+% \subsection{Title}
+% \iffalse
+
+%% === Title ===
+% \fi
+% \begin{macro}{\reportnum}
+% Define a setter for the internal macro for the report number, used in the title and the header. Takes a number as argument.
+%    \begin{macrocode}
+\DeclareRobustCommand*{\reportnum}[1]{\gdef\@reportnum{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\groupnum}
+% Define a setter for the internal macro for the group number, used in the header. Takes a number as argument.
+%    \begin{macrocode}
+\DeclareRobustCommand*{\groupnum}[1]{\gdef\@groupnum{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\and}
+% Redefines |\and| to allow for vertical author list in the title.
+%    \begin{macrocode}
+\gdef\and{\\}
+%    \end{macrocode}
+% \end{macro}
+% \iffalse
+
+% \fi
+% \begin{macro}{\@getquarters}
+% The |\todayinquarters| command will need to get the current quarter.
+%    \begin{macrocode}
+\newcommand*{\@getquarters}
+{%
+    \ifnumcomp{\the\month}{>}{1}
+    {%
+        \ifnumcomp{\the\month}{>}{6}
+        {%
+            \ifnumcomp{\the\month}{>}{8}
+            {%
+                1%
+            }{3}%
+        }{2}%
+    }{1}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@getschoolyear}
+% The |\todayinquarters| command will need to get the current school year.
+%    \begin{macrocode}
+\newcommand*{\@getschoolyear}
+{%
+    \ifnumcomp{\the\month}{>}{8}
+    {%
+        \ifnumcomp{\the\day}{>}{13}
+        {%
+            \the\year-\the\numexpr(\the\year+1)%
+        }{\the\numexpr(\the\year-1)\relax-\the\year}%
+    }{\the\numexpr(\the\year-1)\relax-\the\year}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\todayinquarters}
+% Define a command to typeset the current date as quarters.
+%    \begin{macrocode}
+\newcommand*{\todayinquarters}
+{%
+    \@getquarters\ifnumcomp{\@getquarters}{=}{1}
+        {\textsuperscript{er}}
+        {\textsuperscript{e}}
+    quadrimestre \@getschoolyear%
+}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \iffalse
+
+% \fi
+% Set default values.
+%    \begin{macrocode}
+\title{Rapport du TP n°}
+\reportnum{1}
+\groupnum{1}
+\date{\todayinquarters}
+%    \end{macrocode}
+% 
+% \iffalse
+
+% \fi
+% \begin{macro}{\maketitle}
+% Redefine |\maketitle| to generates the design and typeset accordingly on a dedicated page.
+%    \begin{macrocode}
+\renewcommand{\maketitle}
+{%
+    \begin{noparskip}
+        \begin{titlepage}%
+            \begin{center}%
+                \textsc{\LARGE\href{https://unamur.be}{\textcolor{black}{Université de Namur}}}%
+                \vspace{1.5cm}%
+                
+                \textsc{\Large Sécurité Informatique}%
+                \vspace{1cm}%
+                
+                % Title
+                \HRule \vspace{.5cm}%
+                \textbf{\huge \@title\@reportnum}\\%
+                \HRule \vspace{1cm}%
+                
+                % UNamur Logo
+                \includegraphics[height=180px]{unamur}%
+                \vspace{1cm}%
+                
+                % Date
+                {\LARGE \@date}%
+                \vspace{4cm}%
+                
+                % Group members (Author(s))
+                \underline{\textbf{\textsc{Groupe \@groupnum}}}%
+                \vspace{.5em}%
+                
+                \begin{tabular}[t]{c}%
+                    \@author
+                \end{tabular}%
+            \end{center}%
+            \vfill\null
+        \end{titlepage}%
+    \end{noparskip}
+    \global\let\maketitle\relax
+    \global\let\@title\@empty
+    \global\let\@author\@empty
+    \global\let\@date\@empty
+    \global\let\@thanks\@empty
+    \global\let\title\relax
+    \global\let\author\relax
+    \global\let\date\relax
+    \global\let\thanks\relax
+    \global\let\and\relax
+}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsection{Table of Contents}
+% \iffalse
+
+%% === Table of Contents ===
+% \fi
+% \begin{macro}{\tableofcontents}
+% Redefine |\tableofcontents| to generate the table of contents on a dedicated page with no space between items.
+%    \begin{macrocode}
+\let\latex@tableofcontents\tableofcontents
+\renewcommand{\tableofcontents}
+{%
+    \newpage%
+    \begin{noparskip}%
+        \latex@tableofcontents%
+    \end{noparskip}%
+    \vfill%
+}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsection{Page Style}
+% \iffalse
+
+%% === Page Style ===
+% \fi
+% Set the page style to \texttt{fancy} for the \ctan{fancyhdr} package commands.
+%    \begin{macrocode}
+\pagestyle{fancy}
+%    \end{macrocode}
+% \subsubsection{Header/Footer}
+% \iffalse
+
+%% == Header/Footer ==
+% \fi
+% Clear the header and the footer.
+%    \begin{macrocode}
+\fancyhf{}
+%    \end{macrocode}
+% Configure the header.
+%    \begin{macrocode}
+\fancyhead[L]{\includegraphics[trim={0 200px 0 0},clip,height=30px]{unamur}}
+\fancyhead[C]{\large{\textbf{Rapport du TP n°\@reportnum\ - Groupe \@groupnum}}}
+\fancyhead[R]{INFOB301\\\href{https://unamur.be}{\textcolor{black}{UNamur}}}
+\setlength{\headheight}{40pt}
+%    \end{macrocode}
+% \iffalse
+
+% \fi
+%% Remove extra space in the section name display.
+%    \begin{macrocode}
+\renewcommand*{\sectionmark}[1]{\markboth{\MakeUppercase{#1}}{}}
+%    \end{macrocode}
+% Configure the footer.
+%    \begin{macrocode}
+\fancyfoot[L]{\textcolor{gray}{\leftmark}}
+\fancyfoot[R]{\textcolor{gray}{\thepage}}
+\renewcommand*{\footrulewidth}{0.5pt}
+%    \end{macrocode}
+% 
+% \subsection{Sections}
+% \iffalse
+
+%% === Sections ===
+% \fi
+% Removing section numbering while keeping the counter for the subsections to display properly.
+%    \begin{macrocode}
+\renewcommand*{\thesection}{}
+\renewcommand*{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\let\sectionignore\@gobbletwo
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+%    \end{macrocode}
+% 
+% \subsection{Text Formatting}
+% \iffalse
+
+%% === Text Formatting ===
+% \fi
+% Define custom colours.
+%    \begin{macrocode}
+\definecolor{lightergray}{rgb}{0.9, 0.9, 0.9}
+%    \end{macrocode}
+% \iffalse
+
+% \fi
+% \begin{macro}{\code}
+% Define a macro to quickly typeset simple code-like text.
+%    \begin{macrocode}
+\newcommand*{\code}[1]{\mbox{\texttt{\textit{#1}}}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \iffalse
+
+% \fi
+% \begin{macro}{\HRule}
+% Define a macro to make a full line thin rule. Used in the title generation.
+%    \begin{macrocode}
+\newcommand*{\HRule}{\rule{\linewidth}{0.5mm}\par}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \iffalse
+
+% \fi
+% Set default values for paragraph indent and in-between paragraph spacing.
+%    \begin{macrocode}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+%    \end{macrocode}
+% 
+% \iffalse
+
+% \fi
+% Set default configuration for the \ctan{hyperref} package.
+%    \begin{macrocode}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+%    \end{macrocode}
+% 
+% \iffalse
+
+% \fi
+% Set default configuration for the \ctan{minted} package.
+%    \begin{macrocode}
+\setminted{autogobble, bgcolor=lightergray, breaklines, linenos, frame=lines, framesep=5pt}
+\setminted[text]{linenos=false, frame=none}
+%    \end{macrocode}
+% \iffalse
+
+% \fi
+% \begin{macro}{noparskip}
+% Define an environment to typeset paragraphs without in-between paragraph spacing.
+%    \begin{macrocode}
+\newenvironment{noparskip}
+{%
+    \vspace{\parskip}%
+    \setlength{\parskip}{0pt}%
+    \par\ignorespaces%
+}
+{\par\ignorespacesafterend}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsection{Challenges}
+% \iffalse
+
+%% === Challenges ===
+% \fi
+% ^^A \newcommand{\challenge}[1]{\include{#1}}
+% \begin{macro}{\challengespath}
+% Define a command to set the path to the folder containing the challenges files.
+%    \begin{macrocode}
+\DeclareRobustCommand*{\challengespath}[1]{\gdef\@challengespath{\trim@spaces{#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\challengesprefix}
+% Define a command to set the prefix of the challenges files.
+%    \begin{macrocode}
+\DeclareRobustCommand*{\challengesprefix}[1]{\gdef\@challengesprefix{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \iffalse
+
+% \fi
+% \begin{macro}{\includechallenges}
+% Define a command to include a specified number of challenges files. Takes a number as argument. The path to the files can be set with the |\challengespath| command.
+%    \begin{macrocode}
+\newcommand{\includechallenges}[1]
+{%
+    \foreach \x in {1,...,#1}{%
+        \IfEndWith{\@challengespath}{/}
+            {\include{\@challengespath \@challengesprefix\x}}
+            {\include{\@challengespath/\@challengesprefix\x}}%
+    }%
+    \global\let\challengespath\relax%
+    \global\let\@challengespath\@empty%
+}
+%</class>
+%    \end{macrocode}
+% \end{macro}
+% \newpage
+% \Finale

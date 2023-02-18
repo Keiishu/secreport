@@ -314,4 +314,10 @@ TSWLatexianTemp*
 # glossaries
 *.glstex
 
+# TeXstudio
+*.txss2
+
 # End of https://www.toptal.com/developers/gitignore/api/latex
+
+# secreport build
+secreport.cls
