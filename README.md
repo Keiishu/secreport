@@ -19,7 +19,7 @@ You can name it whatever you want, just be sure to tell the class with `\challen
 
 As you would probably have done it anyway, you have to name your challenges with a prefix. Again, whatever you want, but you probably want something simple. Use `\challengesprefix{<prefix>}` to setup your chosen prefix.
 
-Once this is all set, use `\includechallenges{<num>}` in your document environment to import your challenges within the main file -- `<num>` being the number of challenges you want to import.
+Once this is all set, use `\includechallenges{<num>}` in your document environment to import your challenges within your main file, `<num>` being the number of challenges you want to import.
 
 #### **Example**
 ```
