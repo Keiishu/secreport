@@ -23,10 +23,10 @@ As you would probably have done it anyway, you have to name your challenges with
 ```
 .
 ├── Challenges
-│   ├── C1
-│   ├── C2
-│   ├── C3
-│   └── C4
+│   ├── C1.tex
+│   ├── C2.tex
+│   ├── C3.tex
+│   └── C4.tex
 ├── main.tex
 ├── unamur.png
 └── secreport.cls
